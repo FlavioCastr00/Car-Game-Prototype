@@ -12,6 +12,8 @@ public class PlayerCarController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.centerOfMass = new Vector3(0, -0.5f, 0); // Lower center of mass to make car harder to flip
+        rb.linearDamping = 1.0f;
+        rb.angularDamping = 2.0f;
     }
 
     void FixedUpdate()
