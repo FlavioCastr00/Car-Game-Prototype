@@ -733,7 +733,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb68b93c746074c4da7e791de40f33c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCarController
+  accelerationInput: 0
+  turnInput: 0
   accelerationForce: 25000
+  turnVelocity: 250
 --- !u!1 &1865280546
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerCarController : MonoBehaviour
 {
     [SerializeField] private float accelerationForce = 10000f;
+    [SerializeField] private float turnVelocity = 250f;
 
     private Rigidbody rb;
 
@@ -10,13 +11,17 @@ public class PlayerCarController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        rb.centerOfMass = new Vector3(0, -0.5f, 0); // Lower center of mass to make car harder to flip
     }
 
     void FixedUpdate()
     {
-        float accelerationInput = Input.GetAxis("Vertical");
-
         // Acceleration follows Newton's second law: F = m * a
-        rb.AddForce(Vector3.forward * accelerationInput * accelerationForce, ForceMode.Force);
+        float accelerationInput = Input.GetAxis("Vertical");
+        rb.AddForce(transform.forward * accelerationInput * accelerationForce, ForceMode.Force);
+
+        // Turn car
+        float turnInput = Input.GetAxis("Horizontal");
+        gameObject.transform.Rotate(Vector3.up * turnInput * turnVelocity * Time.deltaTime);
     }
 }
