@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Scene
+  m_Title: Hierarchy
   m_RootView: {fileID: 4}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -248,8 +248,8 @@ MonoBehaviour:
     y: 0
     width: 319
     height: 382
-  m_MinSize: {x: 202, y: 226}
-  m_MaxSize: {x: 4002, y: 4026}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 19}
@@ -2342,13 +2342,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.26528442, y: -0.3426059, z: 0.10149092, w: 0.8955173}
+    m_Target: {x: 0.100553334, y: -0.28046718, z: 0.029555853, w: 0.9541279}
     speed: 2
-    m_Value: {x: 0.26528358, y: -0.34260482, z: 0.10149061, w: 0.8955145}
+    m_Value: {x: 0.10055301, y: -0.2804663, z: 0.029555758, w: 0.9541248}
   m_Size:
-    m_Target: 9.208371
+    m_Target: 13.09523
     speed: 2
-    m_Value: 9.208371
+    m_Value: 13.09523
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -2424,9 +2424,9 @@ MonoBehaviour:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs:
-      - m_Data: 31958
+      - m_Data: 45586
       m_LastClickedID:
-        m_Data: 0
+        m_Data: 45586
       m_ExpandedIDs:
       - m_Data: -1294
       m_RenameOverlay:
@@ -2503,7 +2503,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts
+    - Assets/Materials/Physics Materials
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -2525,15 +2525,15 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 45652
-    - m_Data: 45654
-    - m_Data: 45656
-    - m_Data: 45658
-    - m_Data: 45660
     - m_Data: 45662
     - m_Data: 45664
     - m_Data: 45666
     - m_Data: 45668
+    - m_Data: 45670
+    - m_Data: 45672
+    - m_Data: 45674
+    - m_Data: 45676
+    - m_Data: 45678
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -2562,20 +2562,20 @@ MonoBehaviour:
   m_AssetTreeState:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs:
-    - m_Data: 31958
+    - m_Data: 45586
     m_LastClickedID:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 45652
-    - m_Data: 45654
-    - m_Data: 45656
-    - m_Data: 45658
-    - m_Data: 45660
     - m_Data: 45662
     - m_Data: 45664
     - m_Data: 45666
     - m_Data: 45668
+    - m_Data: 45670
+    - m_Data: 45672
+    - m_Data: 45674
+    - m_Data: 45676
+    - m_Data: 45678
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -2603,8 +2603,8 @@ MonoBehaviour:
       m_ResourceFile: 
   m_ListAreaState:
     m_SelectedInstanceIDs:
-    - m_Data: 31958
-    m_LastClickedInstanceID: 31958
+    - m_Data: 45586
+    m_LastClickedInstanceID: 45586
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: []
     m_RenameOverlay:

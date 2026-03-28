@@ -894,9 +894,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCarController
   accelerationForce: 30000
-  turnVelocity: 750
+  turnVelocity: 400
   maxSpeed: 100
-  sidewaysGrip: 5
+  sidewaysGrip: 10
+  linearDumping: 0.12
+  angularDumping: 10
 --- !u!65 &1781880429
 BoxCollider:
   m_ObjectHideFlags: 0
