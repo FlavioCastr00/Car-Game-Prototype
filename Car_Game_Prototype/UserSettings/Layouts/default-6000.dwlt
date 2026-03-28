@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Scene
   m_RootView: {fileID: 4}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -2294,9 +2294,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 0, y: 0.52, z: 0}
+    m_Target: {x: 0.9773697, y: 3.0510004, z: 8.8616295}
     speed: 2
-    m_Value: {x: 0, y: 0.52, z: 0}
+    m_Value: {x: 0.9773697, y: 3.0510004, z: 8.8616295}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -2342,13 +2342,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.15484865, y: -0.53725404, z: 0.10109786, w: 0.8228968}
+    m_Target: {x: 0.26528442, y: -0.3426059, z: 0.10149092, w: 0.8955173}
     speed: 2
-    m_Value: {x: 0.15484866, y: -0.5372541, z: 0.10109787, w: 0.82289684}
+    m_Value: {x: 0.26528358, y: -0.34260482, z: 0.10149061, w: 0.8955145}
   m_Size:
-    m_Target: 4.271703
+    m_Target: 9.208371
     speed: 2
-    m_Value: 4.271703
+    m_Value: 9.208371
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -2578,8 +2578,8 @@ MonoBehaviour:
     - m_Data: 45668
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: PlayerCarController
-      m_OriginalName: PlayerCarController
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
@@ -2587,10 +2587,10 @@ MonoBehaviour:
         width: 0
         height: 0
       m_UserData:
-        m_Data: 40092
+        m_Data: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_TrimLeadingAndTrailingWhitespace: 0
       m_ClientGUIView: {fileID: 11}

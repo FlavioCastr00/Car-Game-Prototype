@@ -5,6 +5,7 @@ public class PlayerCarController : MonoBehaviour
     [SerializeField] private float accelerationForce = 30000f;
     [SerializeField] private float turnVelocity = 750f;
     [SerializeField] private float maxSpeed = 100f;
+    [SerializeField] private float sidewaysGrip = 5;
 
     private Rigidbody rb;
 
@@ -21,16 +22,20 @@ public class PlayerCarController : MonoBehaviour
     {
         float speed = rb.linearVelocity.magnitude;
 
-        // Acceleration follows Newton's second law: F = m * a
+        // Inputs
         float accelerationInput = Input.GetAxis("Vertical");
+        float turnInput = Input.GetAxis("Horizontal");
 
+        // Acceleration follows Newton's second law: F = m * a
         float speedFactor = Mathf.Clamp01(1 - (speed / maxSpeed)); // Limits acceleration at high speed
-
         rb.AddForce(transform.forward * accelerationInput * accelerationForce * speedFactor);
 
         // Turn car
-        float turnInput = Input.GetAxis("Horizontal");
         float turnAmount = turnInput * turnVelocity * Mathf.Clamp01(speed / maxSpeed) * Time.fixedDeltaTime;
         rb.MoveRotation(rb.rotation * Quaternion.Euler(0f, turnAmount, 0f));
+
+        // Lateral Friction
+        Vector3 lateralVelocity = Vector3.Dot(rb.linearVelocity, transform.right) * transform.right;
+        rb.AddForce(-lateralVelocity * sidewaysGrip, ForceMode.Acceleration); // Reduce lateral velocity
     }
 }
