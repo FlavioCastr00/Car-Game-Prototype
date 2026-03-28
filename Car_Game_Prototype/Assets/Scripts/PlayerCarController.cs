@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class PlayerCarController : MonoBehaviour
 {
-    [SerializeField] private float accelerationForce = 10000f;
-    [SerializeField] private float turnVelocity = 250f;
+    [SerializeField] private float accelerationForce = 30000f;
+    [SerializeField] private float turnVelocity = 750f;
+    [SerializeField] private float maxSpeed = 100f;
 
     private Rigidbody rb;
 
@@ -18,12 +19,18 @@ public class PlayerCarController : MonoBehaviour
 
     void FixedUpdate()
     {
+        float speed = rb.linearVelocity.magnitude;
+
         // Acceleration follows Newton's second law: F = m * a
         float accelerationInput = Input.GetAxis("Vertical");
-        rb.AddForce(transform.forward * accelerationInput * accelerationForce, ForceMode.Force);
+
+        float speedFactor = Mathf.Clamp01(1 - (speed / maxSpeed)); // Limits acceleration at high speed
+
+        rb.AddForce(transform.forward * accelerationInput * accelerationForce * speedFactor);
 
         // Turn car
         float turnInput = Input.GetAxis("Horizontal");
-        gameObject.transform.Rotate(Vector3.up * turnInput * turnVelocity * Time.deltaTime);
+        float turnAmount = turnInput * turnVelocity * Mathf.Clamp01(speed / maxSpeed) * Time.fixedDeltaTime;
+        rb.MoveRotation(rb.rotation * Quaternion.Euler(0f, turnAmount, 0f));
     }
 }
