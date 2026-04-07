@@ -2,17 +2,24 @@ using UnityEngine;
 
 public class PlayerCarController : MonoBehaviour
 {
+    // Variables for Movement
     [SerializeField] private float accelerationForce = 30000f;
     [SerializeField] private float turnVelocity = 400f;
     [SerializeField] private float maxSpeed = 100f;
     [SerializeField] private float sidewaysGrip = 10;
     [SerializeField] private float linearDumping = 0.12f;
     [SerializeField] private float angularDumping = 10f;
+    
+    // Variables for Ground Checking
+    [SerializeField] private float groundDistance = 0.4f;
+    [SerializeField] private LayerMask groundMask;
+    [SerializeField] private Transform groundCheck;
 
+    // Other  variables
     private Rigidbody rb;
     private float reverseAccelerationForce = 15000f;
+    private bool isGrounded;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -23,6 +30,8 @@ public class PlayerCarController : MonoBehaviour
 
     void FixedUpdate()
     {
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask); // Check if car is on the ground
+
         float speed = rb.linearVelocity.magnitude;
         float forwardSpeed = Vector3.Dot(rb.linearVelocity, transform.forward);
 
@@ -33,21 +42,24 @@ public class PlayerCarController : MonoBehaviour
         // Acceleration follows Newton's second law: F = m * a
         float speedFactor = Mathf.Clamp01(1 - (speed / maxSpeed)); // Limits acceleration at high speed
 
-        if (Input.GetKey(KeyCode.W)) // Forward Speed Force
+        if (isGrounded) // Enable input only when the car is grounded
         {
-            rb.AddForce(transform.forward * accelerationInput * accelerationForce * speedFactor);
-        }
-        else if (Input.GetKey(KeyCode.S)) // Backward Speed Force
-        {
-            rb.AddForce(transform.forward * accelerationInput * reverseAccelerationForce * speedFactor);
-        }
+            if (Input.GetKey(KeyCode.W)) // Forward Speed Force
+            {
+                rb.AddForce(transform.forward * accelerationInput * accelerationForce * speedFactor);
+            }
+            else if (Input.GetKey(KeyCode.S)) // Backward Speed Force
+            {
+                rb.AddForce(transform.forward * accelerationInput * reverseAccelerationForce * speedFactor);
+            }
 
-        // Turn car
-        if (Mathf.Abs(forwardSpeed) > 0.03f)
-        {
-            float direction = Mathf.Sign(forwardSpeed); // 1 or -1
-            float turnAmount = turnInput * turnVelocity * Mathf.Clamp01(speed / maxSpeed) * direction * Time.fixedDeltaTime;
-            rb.MoveRotation(rb.rotation * Quaternion.Euler(0f, turnAmount, 0f));
+            // Turn car
+            if (Mathf.Abs(forwardSpeed) > 0.03f)
+            {
+                float direction = Mathf.Sign(forwardSpeed); // 1 or -1
+                float turnAmount = turnInput * turnVelocity * Mathf.Clamp01(speed / maxSpeed) * direction * Time.fixedDeltaTime;
+                rb.MoveRotation(rb.rotation * Quaternion.Euler(0f, turnAmount, 0f));
+            }
         }
 
         // Dynamic Inertia
