@@ -10,6 +10,7 @@ public class PlayerCarController : MonoBehaviour
     [SerializeField] private float angularDumping = 10f;
 
     private Rigidbody rb;
+    private float reverseAccelerationForce = 15000f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,7 +32,15 @@ public class PlayerCarController : MonoBehaviour
 
         // Acceleration follows Newton's second law: F = m * a
         float speedFactor = Mathf.Clamp01(1 - (speed / maxSpeed)); // Limits acceleration at high speed
-        rb.AddForce(transform.forward * accelerationInput * accelerationForce * speedFactor);
+
+        if (Input.GetKey(KeyCode.W)) // Forward Speed Force
+        {
+            rb.AddForce(transform.forward * accelerationInput * accelerationForce * speedFactor);
+        }
+        else if (Input.GetKey(KeyCode.S)) // Backward Speed Force
+        {
+            rb.AddForce(transform.forward * accelerationInput * reverseAccelerationForce * speedFactor);
+        }
 
         // Turn car
         if (Mathf.Abs(forwardSpeed) > 0.03f)
