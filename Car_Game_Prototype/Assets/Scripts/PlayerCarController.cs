@@ -18,7 +18,10 @@ public class PlayerCarController : MonoBehaviour
     // Other  variables
     private Rigidbody rb;
     private float reverseAccelerationForce = 15000f;
+    private float gravityOffTimer;
+    private float gravityOffDuration = 1f;
     private bool isGrounded;
+    private bool canFly = false;
 
     void Start()
     {
@@ -28,10 +31,33 @@ public class PlayerCarController : MonoBehaviour
         rb.angularDamping = angularDumping;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask); // Check if car is on the ground
 
+        // Set gravity off for a short period when car gets off the ground
+        if (!isGrounded && canFly)
+        {
+            gravityOffTimer = gravityOffDuration;
+            canFly = false;
+            rb.useGravity = false;
+        }
+
+        // Logic to bring gravity back on
+        if (gravityOffTimer > 0)
+        {
+            gravityOffTimer -= Time.deltaTime;
+
+            if (gravityOffTimer < 0 || canFly)
+            {
+                rb.useGravity = true;
+                gravityOffTimer = 0;
+            }
+        }
+    }
+
+    void FixedUpdate()
+    {
         float speed = rb.linearVelocity.magnitude;
         float forwardSpeed = Vector3.Dot(rb.linearVelocity, transform.forward);
 
@@ -44,6 +70,8 @@ public class PlayerCarController : MonoBehaviour
 
         if (isGrounded) // Enable input only when the car is grounded
         {
+            canFly = true;
+
             if (Input.GetKey(KeyCode.W)) // Forward Speed Force
             {
                 rb.AddForce(transform.forward * accelerationInput * accelerationForce * speedFactor);
