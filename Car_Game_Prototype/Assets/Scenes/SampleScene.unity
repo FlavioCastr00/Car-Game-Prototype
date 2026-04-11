@@ -877,7 +877,7 @@ Transform:
   m_GameObject: {fileID: 1781880425}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.52, z: 0}
+  m_LocalPosition: {x: 0, y: 0.674, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -925,12 +925,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb68b93c746074c4da7e791de40f33c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCarController
-  accelerationForce: 30000
-  turnVelocity: 400
-  maxSpeed: 100
-  sidewaysGrip: 10
-  linearDumping: 0.12
-  angularDumping: 10
+  accelerationForce: 10000
+  turnVelocity: 100
+  maxSpeed: 50
+  sidewaysGrip: 5
+  linearDumping: 0.005
+  angularDumping: 1
   groundDistance: 0.4
   groundMask:
     serializedVersion: 2

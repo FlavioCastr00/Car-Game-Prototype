@@ -3,13 +3,17 @@ using UnityEngine;
 public class PlayerCarController : MonoBehaviour
 {
     // Variables for Movement
-    [SerializeField] private float accelerationForce = 30000f;
-    [SerializeField] private float turnVelocity = 400f;
-    [SerializeField] private float maxSpeed = 100f;
-    [SerializeField] private float sidewaysGrip = 10;
-    [SerializeField] private float linearDumping = 0.12f;
-    [SerializeField] private float angularDumping = 10f;
-    
+    [SerializeField] private float accelerationForce = 10000f;
+    [SerializeField] private float turnVelocity = 100f;
+    [SerializeField] private float maxSpeed = 50f;
+    [SerializeField] private float sidewaysGrip = 5f;
+    [SerializeField] private float linearDumping = 0.005f;
+    [SerializeField] private float angularDumping = 1f;
+    float speed;
+    float forwardSpeed;
+    private float accelerationInput;
+    float turnInput;
+
     // Variables for Ground Checking
     [SerializeField] private float groundDistance = 0.4f;
     [SerializeField] private LayerMask groundMask;
@@ -33,6 +37,13 @@ public class PlayerCarController : MonoBehaviour
 
     void Update()
     {
+        // Inputs
+        accelerationInput = Input.GetAxis("Vertical");
+        turnInput = Input.GetAxis("Horizontal");
+        
+        speed = rb.linearVelocity.magnitude;
+        forwardSpeed = Vector3.Dot(rb.linearVelocity, transform.forward);
+
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask); // Check if car is on the ground
 
         // Set gravity off for a short period when car gets off the ground
@@ -54,29 +65,24 @@ public class PlayerCarController : MonoBehaviour
                 gravityOffTimer = 0;
             }
         }
+
+        Debug.Log($"{speed} | {forwardSpeed}");
     }
 
     void FixedUpdate()
     {
-        float speed = rb.linearVelocity.magnitude;
-        float forwardSpeed = Vector3.Dot(rb.linearVelocity, transform.forward);
-
-        // Inputs
-        float accelerationInput = Input.GetAxis("Vertical");
-        float turnInput = Input.GetAxis("Horizontal");
-
         // Acceleration follows Newton's second law: F = m * a
-        float speedFactor = Mathf.Clamp01(1 - (speed / maxSpeed)); // Limits acceleration at high speed
+        float speedFactor = Mathf.Clamp01(1 - Mathf.Pow(speed / maxSpeed, 3)); // Limits acceleration at high speed
 
         if (isGrounded) // Enable input only when the car is grounded
         {
             canFly = true;
 
-            if (Input.GetKey(KeyCode.W)) // Forward Speed Force
+            if (accelerationInput > 0) // Forward Speed Force
             {
                 rb.AddForce(transform.forward * accelerationInput * accelerationForce * speedFactor);
             }
-            else if (Input.GetKey(KeyCode.S)) // Backward Speed Force
+            else if (accelerationInput < 0) // Backward Speed Force
             {
                 rb.AddForce(transform.forward * accelerationInput * reverseAccelerationForce * speedFactor);
             }
@@ -91,7 +97,7 @@ public class PlayerCarController : MonoBehaviour
         }
 
         // Dynamic Inertia
-        rb.linearDamping = linearDumping + (speed * 0.02f);
+        rb.linearDamping = linearDumping + (speed * 0.0002f);
 
         // Lateral Friction
         Vector3 lateralVelocity = Vector3.Dot(rb.linearVelocity, transform.right) * transform.right;
