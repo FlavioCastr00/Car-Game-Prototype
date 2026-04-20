@@ -17,7 +17,14 @@ public class PlayerCarController : MonoBehaviour
     private float forwardSpeed;
     private float accelerationInput;
     private float turnInput;
-    
+
+    // Variables for Automatic Gear
+    [SerializeField] private float changeGearsDuration = 0.5f;
+    private float changeGearsTimer;
+    private float[] speedToChangeGuears = { 7.0f, 14.0f, 21.0f, 28.0f };
+    private int currentGuear = 0;
+    private bool isChangingGuears = false;
+
     // Variables for Ground Checking
     [SerializeField] private float groundDistance = 0.4f;
     [SerializeField] private LayerMask groundMask;
@@ -69,6 +76,33 @@ public class PlayerCarController : MonoBehaviour
             }
         }
 
+        // Detect Change Guear
+        if (!isChangingGuears && currentGuear < speedToChangeGuears.Length)
+        {
+            if (forwardSpeed > speedToChangeGuears[currentGuear])
+            {
+                isChangingGuears = true;
+                changeGearsTimer = changeGearsDuration;
+            }
+        }
+
+        // Handle Change Guear Timer
+        if (isChangingGuears && changeGearsTimer > 0)
+        {
+            changeGearsTimer -= Time.deltaTime;
+            if (changeGearsTimer <= 0)
+            {
+                isChangingGuears = false;
+                currentGuear++;
+            }
+        }
+
+        // Reset Guear
+        if (forwardSpeed <= 2.0f)
+        {
+            currentGuear = 0;
+        }
+
         Debug.Log($"{speed} | {forwardSpeed}");
     }
 
@@ -82,7 +116,7 @@ public class PlayerCarController : MonoBehaviour
             canFly = true;
             throttle = Mathf.SmoothDamp(throttle, accelerationInput, ref throttleVelocity, throttleSmoothTime);
 
-            if (accelerationInput > 0) // Forward Speed Force
+            if (accelerationInput > 0 && !isChangingGuears) // Forward Speed Force
             {
                 rb.AddForce(transform.forward * throttle * accelerationForce * speedFactor);
             }
