@@ -4,16 +4,20 @@ public class PlayerCarController : MonoBehaviour
 {
     // Variables for Movement
     [SerializeField] private float accelerationForce = 10000f;
+    [SerializeField] private float reverseAccelerationForce = 8000f;
     [SerializeField] private float turnVelocity = 100f;
     [SerializeField] private float maxSpeed = 50f;
     [SerializeField] private float sidewaysGrip = 5f;
     [SerializeField] private float linearDumping = 0.005f;
     [SerializeField] private float angularDumping = 1f;
-    float speed;
-    float forwardSpeed;
+    [SerializeField] private float throttleSmoothTime = 0.3f;
+    private float throttle;
+    private float throttleVelocity;
+    private float speed;
+    private float forwardSpeed;
     private float accelerationInput;
-    float turnInput;
-
+    private float turnInput;
+    
     // Variables for Ground Checking
     [SerializeField] private float groundDistance = 0.4f;
     [SerializeField] private LayerMask groundMask;
@@ -21,9 +25,8 @@ public class PlayerCarController : MonoBehaviour
 
     // Other  variables
     private Rigidbody rb;
-    private float reverseAccelerationForce = 15000f;
     private float gravityOffTimer;
-    private float gravityOffDuration = 1f;
+    private float gravityOffDuration = 0.5f;
     private bool isGrounded;
     private bool canFly = false;
 
@@ -77,14 +80,15 @@ public class PlayerCarController : MonoBehaviour
         if (isGrounded) // Enable input only when the car is grounded
         {
             canFly = true;
+            throttle = Mathf.SmoothDamp(throttle, accelerationInput, ref throttleVelocity, throttleSmoothTime);
 
             if (accelerationInput > 0) // Forward Speed Force
             {
-                rb.AddForce(transform.forward * accelerationInput * accelerationForce * speedFactor);
+                rb.AddForce(transform.forward * throttle * accelerationForce * speedFactor);
             }
             else if (accelerationInput < 0) // Backward Speed Force
             {
-                rb.AddForce(transform.forward * accelerationInput * reverseAccelerationForce * speedFactor);
+                rb.AddForce(transform.forward * throttle * reverseAccelerationForce * speedFactor);
             }
 
             // Turn car
