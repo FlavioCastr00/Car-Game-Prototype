@@ -497,7 +497,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollowPlayer
   cameraLookPosition: {fileID: 1052072582}
-  cameraPos1: {x: 0, y: 1.3, z: -5.75}
+  cameraPos1: {x: 0, y: 1.3, z: -5.45}
+  smoothTime: 0.1
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -926,11 +927,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCarController
   accelerationForce: 10000
+  reverseAccelerationForce: 8000
   turnVelocity: 100
   maxSpeed: 50
   sidewaysGrip: 5
   linearDumping: 0.005
   angularDumping: 1
+  throttleSmoothTime: 0.3
+  changeGearsDuration: 0.5
   groundDistance: 0.4
   groundMask:
     serializedVersion: 2
