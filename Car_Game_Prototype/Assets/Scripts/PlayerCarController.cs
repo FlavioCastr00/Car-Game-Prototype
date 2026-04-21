@@ -29,13 +29,15 @@ public class PlayerCarController : MonoBehaviour
     [SerializeField] private float groundDistance = 0.4f;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private Transform groundCheck;
+    [SerializeField] private Transform upSideDownCheck;
 
     // Other  variables
     private Rigidbody rb;
     private float gravityOffTimer;
-    private float gravityOffDuration = 0.5f;
+    private float gravityOffDuration = 0.3f;
     private bool isGrounded;
     private bool canFly = false;
+    private bool isFlipped = false;
 
     void Start()
     {
@@ -101,6 +103,22 @@ public class PlayerCarController : MonoBehaviour
         if (forwardSpeed <= 2.0f)
         {
             currentGuear = 0;
+        }
+
+        // Detect if the car is Flipped Upside-Down
+        if (Physics.CheckSphere(upSideDownCheck.position, 1f, groundMask))
+        {
+            isFlipped = true;
+        }
+        else
+        {
+            isFlipped = false;
+        }
+
+        // Press F to flip the car
+        if (Input.GetKeyDown(KeyCode.F) && isFlipped)
+        {
+            gameObject.transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, 0f);
         }
 
         Debug.Log($"{speed} | {forwardSpeed}");
