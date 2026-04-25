@@ -78,32 +78,8 @@ public class PlayerCarController : MonoBehaviour
             }
         }
 
-        // Detect Change Guear
-        if (!isChangingGuears && currentGuear < speedToChangeGuears.Length)
-        {
-            if (forwardSpeed > speedToChangeGuears[currentGuear])
-            {
-                isChangingGuears = true;
-                changeGearsTimer = changeGearsDuration;
-            }
-        }
-
-        // Handle Change Guear Timer
-        if (isChangingGuears && changeGearsTimer > 0)
-        {
-            changeGearsTimer -= Time.deltaTime;
-            if (changeGearsTimer <= 0)
-            {
-                isChangingGuears = false;
-                currentGuear++;
-            }
-        }
-
-        // Reset Guear
-        if (forwardSpeed <= 2.0f)
-        {
-            currentGuear = 0;
-        }
+        // Detect and Handle Guear Change
+        HandleGuearShift();
 
         // Detect if the car is Flipped Upside-Down
         if (Physics.CheckSphere(upSideDownCheck.position, 1f, groundMask))
@@ -158,5 +134,38 @@ public class PlayerCarController : MonoBehaviour
         // Lateral Friction
         Vector3 lateralVelocity = Vector3.Dot(rb.linearVelocity, transform.right) * transform.right;
         rb.AddForce(-lateralVelocity * sidewaysGrip, ForceMode.Acceleration); // Reduce lateral velocity
+    }
+
+    private void HandleGuearShift()
+    {
+        // Detect Change Guear
+        if (!isChangingGuears && currentGuear < speedToChangeGuears.Length)
+        {
+            if (forwardSpeed > speedToChangeGuears[currentGuear])
+            {
+                isChangingGuears = true;
+                changeGearsTimer = changeGearsDuration;
+            }
+        }
+
+        // Handle Change Guear Timer
+        if (isChangingGuears && changeGearsTimer > 0)
+        {
+            changeGearsTimer -= Time.deltaTime;
+            if (changeGearsTimer <= 0)
+            {
+                isChangingGuears = false;
+                currentGuear++;
+            }
+        }
+
+        // Detect down-shift
+        if (currentGuear > 0)
+        {
+            if (!isChangingGuears && forwardSpeed < speedToChangeGuears[currentGuear - 1] / 2)
+            {
+                currentGuear--;
+            }
+        }
     }
 }

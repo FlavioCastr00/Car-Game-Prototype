@@ -173,7 +173,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 112}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 17
+  controlID: 55
   draggingID: 0
 --- !u!114 &8
 MonoBehaviour:
@@ -1403,7 +1403,7 @@ MonoBehaviour:
       y: 21
       width: 1247
       height: 650
-    m_Scale: {x: 0.6018519, y: 0.6018519}
+    m_Scale: {x: 0.6018518, y: 0.6018519}
     m_Translation: {x: 623.5, y: 325.00003}
     m_MarginLeft: 0
     m_MarginRight: 0
@@ -2429,7 +2429,6 @@ MonoBehaviour:
         m_Data: 0
       m_ExpandedIDs:
       - m_Data: -1294
-      - m_Data: 45590
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -2526,8 +2525,6 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 45666
-    - m_Data: 45668
     - m_Data: 45670
     - m_Data: 45672
     - m_Data: 45674
@@ -2535,6 +2532,8 @@ MonoBehaviour:
     - m_Data: 45678
     - m_Data: 45680
     - m_Data: 45682
+    - m_Data: 45684
+    - m_Data: 45686
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -2568,8 +2567,6 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 45666
-    - m_Data: 45668
     - m_Data: 45670
     - m_Data: 45672
     - m_Data: 45674
@@ -2577,6 +2574,8 @@ MonoBehaviour:
     - m_Data: 45678
     - m_Data: 45680
     - m_Data: 45682
+    - m_Data: 45684
+    - m_Data: 45686
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
