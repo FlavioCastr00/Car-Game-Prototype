@@ -5871,7 +5871,7 @@ MonoBehaviour:
   reverseAccelerationForce: 8000
   turnVelocity: 100
   maxSpeed: 50
-  sidewaysGrip: 5
+  sidewaysGrip: 8
   linearDumping: 0.005
   angularDumping: 1
   throttleSmoothTime: 0.3

@@ -122,8 +122,10 @@ public class PlayerCarController : MonoBehaviour
             // Turn car
             if (Mathf.Abs(forwardSpeed) > 0.03f)
             {
+                float currentTurnVelocity = Input.GetKey(KeyCode.LeftShift) && isGrounded ? turnVelocity + 30 : turnVelocity;
                 float direction = Mathf.Sign(forwardSpeed); // 1 or -1
-                float turnAmount = turnInput * turnVelocity * Mathf.Clamp01(speed / maxSpeed) * direction * Time.fixedDeltaTime;
+                float steeringFactor = Mathf.Lerp(0.15f, 1f, speed / maxSpeed);
+                float turnAmount = turnInput * currentTurnVelocity * steeringFactor * direction * Time.fixedDeltaTime;
                 rb.MoveRotation(rb.rotation * Quaternion.Euler(0f, turnAmount, 0f));
             }
         }
@@ -133,7 +135,9 @@ public class PlayerCarController : MonoBehaviour
 
         // Lateral Friction
         Vector3 lateralVelocity = Vector3.Dot(rb.linearVelocity, transform.right) * transform.right;
-        rb.AddForce(-lateralVelocity * sidewaysGrip, ForceMode.Acceleration); // Reduce lateral velocity
+        float gripFactor = Mathf.Clamp01(speed / 10);
+        float currentSidewaysGrip = Input.GetKey(KeyCode.LeftShift) && isGrounded ? sidewaysGrip * 0.20f : sidewaysGrip;
+        rb.AddForce(-lateralVelocity * currentSidewaysGrip * gripFactor, ForceMode.Acceleration); // Reduce lateral velocity
     }
 
     private void HandleGuearShift()
