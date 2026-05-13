@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Game
   m_RootView: {fileID: 4}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -173,7 +173,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 112}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 17
+  controlID: 124
   draggingID: 0
 --- !u!114 &8
 MonoBehaviour:
@@ -248,8 +248,8 @@ MonoBehaviour:
     y: 0
     width: 319
     height: 382
-  m_MinSize: {x: 202, y: 226}
-  m_MaxSize: {x: 4002, y: 4026}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 19}
@@ -2294,9 +2294,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 0.0000004952957, y: 0.3016485, z: -1.164842}
+    m_Target: {x: -0.10801077, y: 0.051000115, z: -107.114}
     speed: 2
-    m_Value: {x: 0.0000004952957, y: 0.3016485, z: -1.164842}
+    m_Value: {x: -0.10801077, y: 0.051000115, z: -107.114}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -2342,17 +2342,17 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.09106202, y: -0.6611413, z: 0.08132861, w: 0.7402614}
+    m_Target: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
     speed: 2
-    m_Value: {x: 0.09106195, y: -0.6611408, z: 0.08132855, w: 0.74026084}
+    m_Value: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_Size:
-    m_Target: 7.028851
+    m_Target: 3.3344755
     speed: 2
-    m_Value: 7.028851
+    m_Value: 3.3344755
   m_Ortho:
-    m_Target: 0
+    m_Target: 1
     speed: 2
-    m_Value: 0
+    m_Value: 1
   m_CameraSettings:
     m_Speed: 1
     m_SpeedNormalized: 0.5
@@ -2424,11 +2424,12 @@ MonoBehaviour:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs:
-      - m_Data: 45602
+      - m_Data: 31958
       m_LastClickedID:
-        m_Data: 45602
+        m_Data: 0
       m_ExpandedIDs:
       - m_Data: -1294
+      - m_Data: 45822
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -2446,7 +2447,7 @@ MonoBehaviour:
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_TrimLeadingAndTrailingWhitespace: 0
-        m_ClientGUIView: {fileID: 5}
+        m_ClientGUIView: {fileID: 10}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -2502,8 +2503,7 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SkipHidden: 0
     m_SearchArea: 1
-    m_Folders:
-    - Assets/Scripts
+    m_Folders: []
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -2525,6 +2525,8 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
+    - m_Data: 46134
+    - m_Data: 46136
     - m_Data: 46138
     - m_Data: 46140
     - m_Data: 46142
@@ -2533,8 +2535,6 @@ MonoBehaviour:
     - m_Data: 46148
     - m_Data: 46150
     - m_Data: 46152
-    - m_Data: 46154
-    - m_Data: 46156
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -2563,25 +2563,24 @@ MonoBehaviour:
   m_AssetTreeState:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs:
-    - m_Data: 45602
+    - m_Data: 31958
     m_LastClickedID:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
+    - m_Data: 46134
+    - m_Data: 46136
     - m_Data: 46138
     - m_Data: 46140
     - m_Data: 46142
-    - m_Data: 46144
     - m_Data: 46146
     - m_Data: 46148
-    - m_Data: 46150
-    - m_Data: 46152
-    - m_Data: 46154
-    - m_Data: 46156
+    - m_Data: 46508
+    - m_Data: 49518
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: Tyre Smoke PS
+      m_OriginalName: Tyre Smoke PS
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
@@ -2589,10 +2588,10 @@ MonoBehaviour:
         width: 0
         height: 0
       m_UserData:
-        m_Data: 0
+        m_Data: 49522
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
       m_TrimLeadingAndTrailingWhitespace: 0
       m_ClientGUIView: {fileID: 11}
@@ -2605,8 +2604,8 @@ MonoBehaviour:
       m_ResourceFile: 
   m_ListAreaState:
     m_SelectedInstanceIDs:
-    - m_Data: 45602
-    m_LastClickedInstanceID: 45602
+    - m_Data: 31958
+    m_LastClickedInstanceID: 31958
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: []
     m_RenameOverlay:
@@ -2679,7 +2678,7 @@ MonoBehaviour:
   m_ObjectsLockedBeforeSerialization: []
   m_InstanceIDsLockedBeforeSerialization: 
   m_PreviewResizer:
-    m_CachedPref: 169
+    m_CachedPref: -319
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1

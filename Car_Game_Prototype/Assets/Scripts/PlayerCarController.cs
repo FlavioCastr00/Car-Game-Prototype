@@ -11,6 +11,7 @@ public class PlayerCarController : MonoBehaviour
     [SerializeField] private float linearDumping = 0.005f;
     [SerializeField] private float angularDumping = 1f;
     [SerializeField] private float throttleSmoothTime = 0.3f;
+    private Vector3 lateralVelocity;
     private float throttle;
     private float throttleVelocity;
     private float speed;
@@ -32,12 +33,15 @@ public class PlayerCarController : MonoBehaviour
     [SerializeField] private Transform upSideDownCheck;
 
     // Other  variables
+    [SerializeField] ParticleSystem rearLeftTyreSmoke;
+    [SerializeField] ParticleSystem rearRightTyreSmoke;
     private Rigidbody rb;
     private float gravityOffTimer;
     private float gravityOffDuration = 0.3f;
     private bool isGrounded;
     private bool canFly = false;
     private bool isFlipped = false;
+    private bool isDrifting = false;
 
     void Start()
     {
@@ -97,6 +101,25 @@ public class PlayerCarController : MonoBehaviour
             gameObject.transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, 0f);
         }
 
+        //Handle Drift Effects
+        isDrifting = Input.GetKey(KeyCode.LeftShift) && lateralVelocity.magnitude > 2f && isGrounded ? true : false;
+        if (isDrifting)
+        {
+            if (!rearLeftTyreSmoke.isPlaying)
+            {
+                rearLeftTyreSmoke.Play();
+                rearRightTyreSmoke.Play();
+            }
+        }
+        else
+        {
+            if (rearLeftTyreSmoke.isPlaying)
+            {
+                rearLeftTyreSmoke.Stop();
+                rearRightTyreSmoke.Stop();
+            }
+        }
+
         Debug.Log($"{speed} | {forwardSpeed}");
     }
 
@@ -134,7 +157,7 @@ public class PlayerCarController : MonoBehaviour
         rb.linearDamping = linearDumping + (speed * 0.0002f);
 
         // Lateral Friction
-        Vector3 lateralVelocity = Vector3.Dot(rb.linearVelocity, transform.right) * transform.right;
+        lateralVelocity = Vector3.Dot(rb.linearVelocity, transform.right) * transform.right;
         float gripFactor = Mathf.Clamp01(speed / 10);
         float currentSidewaysGrip = Input.GetKey(KeyCode.LeftShift) && isGrounded ? sidewaysGrip * 0.20f : sidewaysGrip;
         rb.AddForce(-lateralVelocity * currentSidewaysGrip * gripFactor, ForceMode.Acceleration); // Reduce lateral velocity
