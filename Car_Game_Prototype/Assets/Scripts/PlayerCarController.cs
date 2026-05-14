@@ -33,6 +33,7 @@ public class PlayerCarController : MonoBehaviour
     [SerializeField] private Transform upSideDownCheck;
 
     // Other  variables
+    [SerializeField] PlayerUIManager playerUIManager;
     [SerializeField] ParticleSystem rearLeftTyreSmoke;
     [SerializeField] ParticleSystem rearRightTyreSmoke;
     private Rigidbody rb;
@@ -42,6 +43,16 @@ public class PlayerCarController : MonoBehaviour
     private bool canFly = false;
     private bool isFlipped = false;
     private bool isDrifting = false;
+
+    public float GetSpeedKM()
+    {
+        return speed;
+    }
+
+    public float[] GetSpeedToChangeGuears()
+    {
+        return speedToChangeGuears;
+    }
 
     void Start()
     {
@@ -183,6 +194,10 @@ public class PlayerCarController : MonoBehaviour
             {
                 isChangingGuears = false;
                 currentGuear++;
+                if (currentGuear < speedToChangeGuears.Length)
+                {
+                    playerUIManager.SetMaxSpeedGuearsIndex(currentGuear);
+                }
             }
         }
 
@@ -192,6 +207,7 @@ public class PlayerCarController : MonoBehaviour
             if (!isChangingGuears && forwardSpeed < speedToChangeGuears[currentGuear - 1] / 2)
             {
                 currentGuear--;
+                playerUIManager.SetMaxSpeedGuearsIndex(currentGuear);
             }
         }
     }
