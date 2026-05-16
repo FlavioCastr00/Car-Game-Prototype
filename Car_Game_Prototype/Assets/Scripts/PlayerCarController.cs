@@ -10,10 +10,7 @@ public class PlayerCarController : MonoBehaviour
     [SerializeField] private float sidewaysGrip = 5f;
     [SerializeField] private float linearDumping = 0.005f;
     [SerializeField] private float angularDumping = 1f;
-    [SerializeField] private float throttleSmoothTime = 0.3f;
     private Vector3 lateralVelocity;
-    private float throttle;
-    private float throttleVelocity;
     private float speed;
     private float forwardSpeed;
     private float accelerationInput;
@@ -131,8 +128,6 @@ public class PlayerCarController : MonoBehaviour
                 rearRightTyreSmoke.Stop();
             }
         }
-
-        Debug.Log($"{speed} | {forwardSpeed}");
     }
 
     void FixedUpdate()
@@ -143,15 +138,14 @@ public class PlayerCarController : MonoBehaviour
         if (isGrounded) // Enable input only when the car is grounded
         {
             canFly = true;
-            throttle = Mathf.SmoothDamp(throttle, accelerationInput, ref throttleVelocity, throttleSmoothTime);
 
             if (accelerationInput > 0 && !isChangingGuears) // Forward Speed Force
             {
-                rb.AddForce(transform.forward * throttle * accelerationForce * speedFactor);
+                rb.AddForce(transform.forward * accelerationForce * speedFactor);
             }
             else if (accelerationInput < 0) // Backward Speed Force
             {
-                rb.AddForce(transform.forward * throttle * reverseAccelerationForce * speedFactor);
+                rb.AddForce(transform.forward * -reverseAccelerationForce * speedFactor);
             }
 
             // Turn car
