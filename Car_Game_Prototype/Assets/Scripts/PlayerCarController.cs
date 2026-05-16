@@ -22,7 +22,7 @@ public class PlayerCarController : MonoBehaviour
     // Variables for Automatic Gear
     [SerializeField] private float changeGearsDuration = 0.5f;
     private float changeGearsTimer;
-    private float[] speedToChangeGuears = { 7.0f, 14.0f, 21.0f, 28.0f };
+    private float[] speedToChangeGuears = { 8.0f, 17.0f, 27.0f, 36.0f };
     private int currentGuear = 0;
     private bool isChangingGuears = false;
 
@@ -44,7 +44,7 @@ public class PlayerCarController : MonoBehaviour
     private bool isFlipped = false;
     private bool isDrifting = false;
 
-    public float GetSpeedKM()
+    public float GetSpeed()
     {
         return speed;
     }
@@ -60,6 +60,7 @@ public class PlayerCarController : MonoBehaviour
         rb.centerOfMass = new Vector3(0, -0.5f, 0); // Lower center of mass to make car harder to flip
         rb.linearDamping = linearDumping;
         rb.angularDamping = angularDumping;
+        playerUIManager.SetMaxSpeedGuearsIndex(currentGuear);
     }
 
     void Update()
@@ -177,7 +178,7 @@ public class PlayerCarController : MonoBehaviour
     private void HandleGuearShift()
     {
         // Detect Change Guear
-        if (!isChangingGuears && currentGuear < speedToChangeGuears.Length)
+        if (!isChangingGuears && currentGuear < speedToChangeGuears.Length - 1)
         {
             if (forwardSpeed > speedToChangeGuears[currentGuear])
             {
