@@ -35,7 +35,7 @@ public class PlayerCarController : MonoBehaviour
     [SerializeField] ParticleSystem rearRightTyreSmoke;
     private Rigidbody rb;
     private float gravityOffTimer;
-    private float gravityOffDuration = 0.3f;
+    private float gravityOffDuration = 0.06f;
     private bool isGrounded;
     private bool canFly = false;
     private bool isFlipped = false;
