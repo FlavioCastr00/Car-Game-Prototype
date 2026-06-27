@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerCarController : MonoBehaviour
@@ -68,6 +69,16 @@ public class PlayerCarController : MonoBehaviour
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask); // Check if car is on the ground
 
+        // Control Pitch While Airborne
+        if (isGrounded)
+        {
+            rb.angularDamping = 1;
+        }
+        if (!isGrounded)
+        {
+            rb.angularDamping = 2.5f;
+        }
+
         // Detect and Handle Guear Change
         HandleGuearShift();
 
@@ -105,6 +116,8 @@ public class PlayerCarController : MonoBehaviour
                 rearRightTyreSmoke.Stop();
             }
         }
+
+        Debug.Log(rb.angularVelocity);
     }
 
     void FixedUpdate()
