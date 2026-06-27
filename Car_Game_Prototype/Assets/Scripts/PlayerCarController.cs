@@ -34,6 +34,9 @@ public class PlayerCarController : MonoBehaviour
     [SerializeField] PlayerUIManager playerUIManager;
     [SerializeField] ParticleSystem rearLeftTyreSmoke;
     [SerializeField] ParticleSystem rearRightTyreSmoke;
+    [SerializeField] ParticleSystem afterfireParticle;
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip[] afterfireAudioClips;
     private Rigidbody rb;
     private bool isGrounded;
     private bool isFlipped = false;
@@ -177,6 +180,10 @@ public class PlayerCarController : MonoBehaviour
             {
                 isChangingGuears = false;
                 currentGuear++;
+
+                afterfireParticle.Play();
+                audioSource.PlayOneShot(afterfireAudioClips[UnityEngine.Random.Range(0, 2)]);
+
                 if (currentGuear < speedToChangeGuears.Length)
                 {
                     playerUIManager.SetMaxSpeedGuearsIndex(currentGuear);
