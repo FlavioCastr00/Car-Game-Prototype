@@ -119,8 +119,6 @@ public class PlayerCarController : MonoBehaviour
                 rearRightTyreSmoke.Stop();
             }
         }
-
-        Debug.Log(rb.angularVelocity);
     }
 
     void FixedUpdate()
