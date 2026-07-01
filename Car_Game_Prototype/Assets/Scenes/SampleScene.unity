@@ -7592,6 +7592,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ScoreManager
   playerRB: {fileID: 1781880427}
   scoreText: {fileID: 285708746}
+  playerCarController: {fileID: 1781880428}
 --- !u!1001 &1920567446
 PrefabInstance:
   m_ObjectHideFlags: 0

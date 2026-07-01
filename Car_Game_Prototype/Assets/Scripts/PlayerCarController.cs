@@ -52,6 +52,11 @@ public class PlayerCarController : MonoBehaviour
         return speedToChangeGuears;
     }
 
+    public bool getIsGrounded()
+    {
+        return isGrounded;
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
