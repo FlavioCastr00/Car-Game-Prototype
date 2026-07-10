@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -13,12 +14,15 @@ public class ScoreManager : MonoBehaviour
     // Score Value
     private float highSpeedScore = 10f;
     private float airborneScore = 20f;
+    private float driftScore = 30;
 
     // Score Timer Variables
     private float highSpeedScoreTimer = 0f;
     private float highSpeedScoreCooldown = 3f;
     private float airborneScoreTimer = 0f;
     private float airborneScoreTimerCooldown = 2f;
+    private float driftScoreTimer = 0f;
+    private float driftScoreTimerCooldown = 1f;
 
     // Variables to Calculate new Score
     private int scoreMultiplier = 1;
@@ -40,7 +44,7 @@ public class ScoreManager : MonoBehaviour
         }
         else if (highSpeedScoreTimer > highSpeedScoreCooldown)
         {
-            currentScore += highSpeedScore * scoreMultiplier;
+            UpdateScore(highSpeedScore);
             highSpeedScoreTimer = 0f;
         }
         else if (playerRB.linearVelocity.magnitude < highSpeedScoreTarget && highSpeedScoreTimer != 0f)
@@ -55,13 +59,34 @@ public class ScoreManager : MonoBehaviour
         }
         else if (airborneScoreTimer > airborneScoreTimerCooldown)
         {
-            currentScore += airborneScore * scoreMultiplier;
+            UpdateScore(airborneScore);
             airborneScoreTimer = 0f;
         }
         else if (playerCarController.getIsGrounded() && airborneScoreTimer != 0f)
         {
             airborneScoreTimer = 0f;
         }
+
+        // Score for Drifting
+        if(playerCarController.getIsDrifting() && driftScoreTimer < driftScoreTimerCooldown)
+        {
+            driftScoreTimer += Time.deltaTime;
+        }
+        else if (driftScoreTimer > driftScoreTimerCooldown)
+        {
+            UpdateScore(driftScore);
+            driftScoreTimer = 0f;
+        }
+        else if (!playerCarController.getIsDrifting() && driftScoreTimer != 0f)
+        {
+            driftScoreTimer = 0;
+        }     
+    }
+
+    // Update Score Method
+    private void UpdateScore(float score)
+    {
+        currentScore += score * scoreMultiplier;
 
         // Update UI
         scoreText.text = currentScore.ToString();

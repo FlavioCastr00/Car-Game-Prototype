@@ -57,6 +57,11 @@ public class PlayerCarController : MonoBehaviour
         return isGrounded;
     }
 
+    public bool getIsDrifting()
+    {
+        return isDrifting;
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
