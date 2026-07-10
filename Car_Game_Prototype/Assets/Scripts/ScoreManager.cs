@@ -1,6 +1,6 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -12,26 +12,27 @@ public class ScoreManager : MonoBehaviour
     private float highSpeedScoreTarget = 28f;
 
     // Score Value
-    private float highSpeedScore = 10f;
-    private float airborneScore = 20f;
-    private float driftScore = 30;
+    private float highSpeedScore = 15f;
+    private float airborneScore = 25f;
+    private float driftScore = 35;
 
     // Score Timer Variables
     private float highSpeedScoreTimer = 0f;
     private float highSpeedScoreCooldown = 3f;
     private float airborneScoreTimer = 0f;
-    private float airborneScoreTimerCooldown = 2f;
+    private float airborneScoreTimerCooldown = 1f;
     private float driftScoreTimer = 0f;
     private float driftScoreTimerCooldown = 1f;
 
     // Variables to Calculate new Score
-    private int scoreMultiplier = 1;
+    private float scoreMultiplier = 1f;
     private float currentScore = 0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         scoreText.text = "0";
+        StartCoroutine(DecreaseScoreMultiplierEverySecond());
     }
 
     // Update is called once per frame
@@ -80,13 +81,31 @@ public class ScoreManager : MonoBehaviour
         else if (!playerCarController.getIsDrifting() && driftScoreTimer != 0f)
         {
             driftScoreTimer = 0;
-        }     
+        }
+
+        Debug.Log(scoreMultiplier);
+    }
+
+    // Decrease The Score Multiplier Every Second
+    private IEnumerator DecreaseScoreMultiplierEverySecond()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1f);
+            
+            if (scoreMultiplier > 1f)
+            {
+                scoreMultiplier -= 0.02f;
+            }
+        }
     }
 
     // Update Score Method
     private void UpdateScore(float score)
     {
-        currentScore += score * scoreMultiplier;
+        currentScore += score * Mathf.FloorToInt(scoreMultiplier);
+
+        scoreMultiplier = scoreMultiplier + (score * 0.01f);
 
         // Update UI
         scoreText.text = currentScore.ToString();
