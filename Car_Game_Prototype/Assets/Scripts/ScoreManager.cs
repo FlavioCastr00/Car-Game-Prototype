@@ -6,7 +6,9 @@ public class ScoreManager : MonoBehaviour
 {
     [SerializeField] private Rigidbody playerRB;
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI multiplierText;
     [SerializeField] private PlayerCarController playerCarController;
+    [SerializeField] private CenterBar centerBar;
 
     // Score Target Variables
     private float highSpeedScoreTarget = 28f;
@@ -32,6 +34,7 @@ public class ScoreManager : MonoBehaviour
     void Start()
     {
         scoreText.text = "0";
+        multiplierText.text = "x1";
         StartCoroutine(DecreaseScoreMultiplierEverySecond());
     }
 
@@ -83,7 +86,7 @@ public class ScoreManager : MonoBehaviour
             driftScoreTimer = 0;
         }
 
-        Debug.Log(scoreMultiplier);
+        centerBar.SetValue(scoreMultiplier);
     }
 
     // Decrease The Score Multiplier Every Second
@@ -96,6 +99,9 @@ public class ScoreManager : MonoBehaviour
             if (scoreMultiplier > 1f)
             {
                 scoreMultiplier -= 0.02f;
+                
+                // Update Current Multiplier in the UI
+                multiplierText.text = "x" + Mathf.FloorToInt(scoreMultiplier).ToString();
             }
         }
     }
@@ -107,7 +113,7 @@ public class ScoreManager : MonoBehaviour
 
         scoreMultiplier = scoreMultiplier + (score * 0.01f);
 
-        // Update UI
+        // Update Current Score Text in the UI
         scoreText.text = currentScore.ToString();
     }
 }
