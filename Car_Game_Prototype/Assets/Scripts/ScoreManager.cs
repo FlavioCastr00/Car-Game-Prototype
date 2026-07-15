@@ -9,6 +9,8 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI multiplierText;
     [SerializeField] private PlayerCarController playerCarController;
     [SerializeField] private CenterBar centerBar;
+    [SerializeField] private AudioSource uiAudioSource;
+    [SerializeField] private AudioClip scoreAudioClip;
 
     // Score Target Variables
     private float highSpeedScoreTarget = 28f;
@@ -35,6 +37,9 @@ public class ScoreManager : MonoBehaviour
     {
         scoreText.text = "0";
         multiplierText.text = "x1";
+
+        uiAudioSource = gameObject.GetComponent<AudioSource>();
+
         StartCoroutine(DecreaseScoreMultiplierEverySecond());
     }
 
@@ -111,7 +116,12 @@ public class ScoreManager : MonoBehaviour
     {
         currentScore += score * Mathf.FloorToInt(scoreMultiplier);
 
-        scoreMultiplier = scoreMultiplier + (score * 0.01f);
+        if (scoreMultiplier <= 3f)
+        {
+            scoreMultiplier = scoreMultiplier + (score * 0.01f);
+        }
+
+        uiAudioSource.PlayOneShot(scoreAudioClip);
 
         // Update Current Score Text in the UI
         scoreText.text = currentScore.ToString();
