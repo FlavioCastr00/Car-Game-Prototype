@@ -32,6 +32,11 @@ public class ScoreManager : MonoBehaviour
     private float scoreMultiplier = 1f;
     private float currentScore = 0f;
 
+    public int GetRoundScoreMultiplier()
+    {
+        return Mathf.FloorToInt(scoreMultiplier);
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
